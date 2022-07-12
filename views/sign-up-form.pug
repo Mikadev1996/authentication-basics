@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    nav
+        h1= title
+
+    main.content
+        div.content-display
+            form#form-container(method='POST' action='')
+                .header
+                    h2 Sign Up Form
+                div#form.form
+                    .form-control
+                        label(for='name') Name:
+                        input#name(type='text' name='name' placeholder='Name' required='true')
+                        i.fas.fa-check-circle
+                        i.fas.fa-exclamation-circle
+                        small Error Message
+                    .form-control
+                        label(for='password') Password:
+                        input#password(type='password' name='password' placeholder='Password' required='true')
+                        i.fas.fa-check-circle
+                        i.fas.fa-exclamation-circle
+                        small Error Message
