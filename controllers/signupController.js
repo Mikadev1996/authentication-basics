@@ -1,5 +1,4 @@
-const express = require('express');
-const User = require("../models/user");
+const User = require("../models/user")
 
 exports.sign_up_get = (req, res, next) => {
     res.render('sign-up-form', {
