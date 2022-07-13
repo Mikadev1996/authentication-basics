@@ -8,6 +8,7 @@ block content
     div.content-display
       if (user)
         h1 Welcome back #{user.username}
+        a(href='/log-out') Log Out
       form#form-container(method='POST' action='/log-in')
         .header
           h2 Sign Up Form

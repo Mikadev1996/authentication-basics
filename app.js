@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const User = require('./models/user');
 const signUpRouter = require('./routes/signup');
 const signInRouter = require('./routes/signin');
+const logoutRouter = require('./routes/logout');
 
 const myMongoDB = "mongodb+srv://mika:mika@cluster0.ntegc.mongodb.net/auth-basics?retryWrites=true&w=majority";
 mongoose.connect(myMongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -50,6 +51,7 @@ app.get('/', (req, res) => res.render('index', {
 }))
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', signInRouter);
+app.use('/log-out', logoutRouter);
 // app.post('/log-in',
 //     passport.authenticate("local", {
 //         successRedirect: '/',
