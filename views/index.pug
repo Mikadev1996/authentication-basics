@@ -4,4 +4,26 @@ block content
   h1= title
   p Welcome to #{title}
 
-  h1 Hello, World!
+  main.content
+    div.content-display
+      if (user)
+        h1 Welcome back #{user.username}
+      form#form-container(method='POST' action='/log-in')
+        .header
+          h2 Sign Up Form
+        div#form.form
+          .form-control
+            label(for='username') username:
+            input#username(type='text' name='username' placeholder='username' required='true')
+            i.fas.fa-check-circle
+            i.fas.fa-exclamation-circle
+            small Error Message
+          .form-control
+            label(for='password') Password:
+            input#password(type='password' name='password' placeholder='Password' required='true')
+            i.fas.fa-check-circle
+            i.fas.fa-exclamation-circle
+            small Error Message
+
+          div
+            button(type='submit') Submit

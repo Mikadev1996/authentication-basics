@@ -44,8 +44,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => res.render('index', {title: 'Express App!!'}))
+app.get('/', (req, res) => res.render('index', {
+    title: 'Express App!',
+    user: req.user
+}))
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', signInRouter);
+// app.post('/log-in',
+//     passport.authenticate("local", {
+//         successRedirect: '/',
+//         failureRedirect: '/'
+//     })
+// )
+
 
 module.exports = app;
