@@ -5,13 +5,14 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 const User = require('./models/user');
 const signUpRouter = require('./routes/signup');
 const signInRouter = require('./routes/signin');
 const logoutRouter = require('./routes/logout');
 
-const myMongoDB = "mongodb+srv://mika:mika@cluster0.ntegc.mongodb.net/auth-basics?retryWrites=true&w=majority";
+const myMongoDB = process.env.MONGODB_URI;
 mongoose.connect(myMongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', () => { console.error.bind(console, 'MongoDB connection error') });
