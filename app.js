@@ -4,6 +4,8 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
+
 const User = require('./models/user');
 const signUpRouter = require('./routes/signup');
 const signInRouter = require('./routes/signin');
@@ -23,9 +25,11 @@ passport.use(
         User.findOne({username: username}, (err, user) => {
             if (err) return done(err);
             if (!user) return done(null, false, { message: "Incorrect Username"});
-            if (user.password !== password) return done(null, false, { message: "Incorrect Password"});
 
-            return done(null, user);
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) return done(null, user);
+                else return done(null, false, { message: "Incorrect Password"});
+            })
         })
     })
 )

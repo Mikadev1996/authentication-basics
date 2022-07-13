@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const bcrypt = require('bcryptjs');
 
 exports.sign_up_get = (req, res, next) => {
     res.render('sign-up-form', {
@@ -7,11 +8,16 @@ exports.sign_up_get = (req, res, next) => {
 }
 
 exports.sign_up_post = (req, res, next) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    }).save(err => {
+    bcrypt.hash(req.body.password, 5, (err, hashedPassword) => {
         if (err) return next(err);
-        res.redirect('/');
+
+        const user = new User({
+            username: req.body.username,
+            password: hashedPassword,
+        }).save(err => {
+            if (err) return next(err);
+            res.redirect('/');
+        })
     })
+
 }
